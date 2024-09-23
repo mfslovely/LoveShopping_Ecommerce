@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Payment{% endblock title %}
+{% block main-content %}
+
+<h1>Payment Successful!</h1>
+<p>Thank you for your purchase. Your payment ID is {{ payment.razorpay_payment_id }}.</p>
+<p>You will receive an email with your order details shortly.</p>
+
+{% endblock main-content %}

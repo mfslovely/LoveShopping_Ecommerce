@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Top Wears{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="list_group">
+                <a href="{% url 'bottomwears' %}" class="list-group-item list-group-item-action" aria-current="true">
+                    Topwears
+                </a>
+                <a href="{% url 'bottomwears_filter' 'below' %}" class="list-group-item list-group-item-action">Below Rs. 1000</a>
+                <a href="{% url 'bottomwears_filter' 'above' %}" class="list-group-item list-group-item-action">Above Rs. 500</a>
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="row">
+                {% for product in bottomwears %}
+                <div class="col-sm-4 text-center mb-4">
+                    <a href="{% url 'product-detail' product.id %}">
+                        <div class="item">
+                            <img src="{{ product.product_image.url }}" alt="{{ product.title }}" height="300" class="img-fluid">
+                            <div class="fw-bold">{{ product.title }}</div>
+                            <div class="fw-bold">Rs. {{ product.selling_price }} 
+                                {% if product.discounted_price %}
+                                    <small class="fw-light text-decoration-line-through">
+                                        Rs. {{ product.discounted_price }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <p>No topwears available at the moment.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

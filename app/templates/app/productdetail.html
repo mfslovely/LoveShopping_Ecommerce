@@ -11,7 +11,7 @@
    <h2>Product Title: {{product.title}}</h2>
    <hr>
    <p>{{product.description}}</p> <br>
-   <h4>Rs.{{product.selling_price}}  <small class="fw-light text-decoration-line-through">Rs.{{product.discounted_price}}</small></h4> <br>
+   <h4>Rs.{{product.discounted_price}}  <small class="fw-light text-decoration-line-through">Rs.{{product.selling_price}}</small></h4> <br>
 
    <form action="/add-to-card" class="d-inline">
     {% csrf_token %}
@@ -21,7 +21,8 @@
     
 
    <!-- <a href="{% url 'add-to-cart' %}" class="btn btn-primary shadow px-5 py-2">Add to Cart</a> -->
-   <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+   <a href="{% url 'buy_now' product.id %}" class="btn btn-primary">Buy Now</a>
+
    <h5 class="mt-5">Available Offers</h5>
    <ul>
     <li>Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit</li>

@@ -1,0 +1,78 @@
+{% extends 'app/base.html' %}
+{% block title %}Sale Products{% endblock title %}
+
+{% block main-content %}
+<div class="container">
+    <h2 class="text-center mb-4">Products on Sale</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        {% for product in products_on_sale %}
+        <div class="col">
+            <a href="{% url 'product-detail' product.id %}" class="text-decoration-none text-dark">
+                <div class="card shadow-sm border-light rounded-3">
+                    <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">Discounted Price: Rs.{{ product.discounted_price }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <p class="text-center">No products on sale at the moment.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Inline CSS -->
+<style>
+    /* Add padding to the container for better spacing */
+    .container {
+        padding: 20px;
+    }
+
+    /* Center the heading */
+    .text-center {
+        text-align: center;
+    }
+
+    /* Card styling */
+    .card {
+        border: none;
+        border-radius: 10px; /* Rounded corners */
+        overflow: hidden; /* Ensures no content overflows the card */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+    }
+
+    .card-img-top {
+        height: 400px; /* Fixed height for images */
+        width: 100%; /* Ensure the image covers the width of the card */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+    }
+
+    .card-body {
+        text-align: center; /* Center text within the card body */
+    }
+
+    .card:hover {
+        transform: scale(1.05); /* Slightly zooms the card on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for a 3D effect */
+    }
+
+    /* Grid styling for horizontal layout */
+    .row-cols-md-4 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem; /* Space between cards */
+    }
+
+    .col {
+        flex: 1;
+    }
+
+    /* Empty message styling */
+    .text-center {
+        font-size: 1.2rem;
+        color: #f00c0c;
+    }
+</style>
+{% endblock main-content %}

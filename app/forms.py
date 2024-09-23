@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm,UsernameField,PasswordC
 from django.contrib.auth.models import User
 from django.contrib.auth import password_validation
 from django.utils.translation import gettext as _
-from .models import Customer
+from .models import Customer,Product
 from django import forms
 from .models import Cart
 
@@ -72,3 +72,32 @@ class CartForm(forms.ModelForm):
     class Meta:
         model = Cart
         fields = ['quantity']
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['brand', 'description', 'selling_price', 'product_image']
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+    )
+
+
+class SellerRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_seller = True  # Set the user as a seller
+        if commit:
+            user.save()
+        return user

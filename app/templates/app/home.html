@@ -32,27 +32,48 @@
 {% endblock banner_slider %}
 
 {% block livesale %}
-<!-- Live Sale Section -->
-<div class="container">
-  <div class="row bg-danger text-center p-5 text-white border-bottom shadow">
-    <h1>SALE IS LIVE NOW</h1>
-    <span>5% Instant Discount on Axis Bank Credit and Debit Card</span>
-    <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
-  </div>
-</div> 
-<!-- End Live Sale Section -->
+  {% if is_sale_live %}
+  <!-- Wrap the entire section in an anchor tag -->
+  <a href="{% url 'on_sale_products' %}" class="text-decoration-none">
+    <div class="container">
+      <div class="row bg-danger text-center p-5 text-white border-bottom shadow">
+        <h1>SALE IS LIVE NOW</h1>
+        <span>15% Discount on all products from 20th Sep to 1st Oct</span>
+        <small class="fw-lighter">Terms and Conditions Apply (For details visit Bank's official website)</small>
+      </div>
+    </div>
+  </a>
+  <!-- End Live Sale Section -->
+  {% endif %}
 {% endblock livesale %}
+
+
 
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
- <h2>Bottom Wears</h2>
- <!-- Slider 1 -->
- <div class="owl-carousel" id="slider1">
-  {% for b in bottomwears %}
-  <a href="{% url 'product-detail' b.id %}" class="btn"><div class="item"><img src="{{b.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{b.title}}</span><br><span class="fs-5">{{b.selling_price}}</span></div></a>
-  {% endfor %}
- </div>
+  <h2>Bottom Wears</h2>
+  <!-- Slider 1 -->
+  <div class="owl-carousel" id="slider1">
+    {% for b in bottomwears %}
+      <a href="{% url 'product-detail' b.id %}" class="text-decoration-none text-dark">
+        <div class="item">
+          <!-- <div class="badge bg-danger text-white position-absolute top-0 start-0 m-2">SALE</div> -->
+          <img src="{{ b.product_image.url }}" alt="{{ b.title }}" height="200px">
+          <span class="fw-bold">{{ b.title }}</span><br>
+
+          {% if b.is_sale %}
+            <span class="text-danger">SALE!!!</span><br>
+            <span class="fs-5 text-decoration-line-through">Rs.{{ b.selling_price }}</span><br>
+            <span class="fs-5">Rs.{{ b.discounted_price }}</span><br>
+            <span class="fs-6 text-success">{{ b.discount_percentage }}% off</span>
+          {% else %}
+            <span class="fs-5">Rs.{{ b.selling_price }}</span>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 </div>
 <!-- End 1st Product Slider -->
 
@@ -97,7 +118,7 @@
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for tp in topwears %}
-  <a href="{% url 'product-detail' tp.id %}" class="btn"><div class="item"><img src="{{tp.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{tp.title}}</span><br><span class="fs-5">{{tp.selling_price}}</span></div></a>
+  <a href="{% url 'product-detail' tp.id %}" class="btn"><div class="item"><img src="{{tp.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{tp.title}}</span><br><span class="fs-5">Rs.{{tp.discounted_price}}</span></div></a>
   {% endfor %}
   
  </div>
@@ -109,10 +130,98 @@
   <!-- Slider 3 -->
   <div class="owl-carousel" id="slider3">
     {% for m in mobiles %}
-    <a href="{% url 'product-detail' m.id %}" class="btn"><div class="item"><img src="{{m.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{m.title}}</span><br><span class="fs-5">{{m.selling_price}}</span></div></a>
+    <a href="{% url 'product-detail' m.id %}" class="btn"><div class="item"><img src="{{m.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{m.title}}</span><br><span class="fs-5">Rs.{{m.discounted_price}}</span></div></a>
     {% endfor %}
    </div>
  </div>
- <!-- End 3nd Product Slider -->
+ 
+ <div class="mx-3">
+  <h2> laptops </h2>
+  <!-- Slider 3 -->
+  <div class="owl-carousel" id="slider3">
+    {% for L in laptops %}
+    <a href="{% url 'product-detail' L.id %}" class="btn"><div class="item"><img src="{{L.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{L.title}}</span><br><span class="fs-5">Rs.{{L.discounted_price}}</span></div></a>
+    {% endfor %}
+   </div>
+ </div>
+
+  <div class="mx-3">
+    <h2> LivingRoom </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for l in LivingRoom %}
+      <a href="{% url 'product-detail' l.id %}" class="btn"><div class="item"><img src="{{l.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{l.title}}</span><br><span class="fs-5">Rs.{{l.selling_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="mx-3">
+    <h2> frigidger </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for f in frigidger %}
+      <a href="{% url 'product-detail' f.id %}" class="btn"><div class="item"><img src="{{f.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{f.title}}</span><br><span class="fs-5">Rs.{{f.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mx-3">
+    <h2> skincare </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for s in skincare %}
+      <a href="{% url 'product-detail' s.id %}" class="btn"><div class="item"><img src="{{s.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{s.title}}</span><br><span class="fs-5">Rs.{{s.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mx-3">
+    <h2> makeup </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for mk in makeup %}
+      <a href="{% url 'product-detail' mk.id %}" class="btn"><div class="item"><img src="{{mk.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{mk.title}}</span><br><span class="fs-5">Rs.{{mk.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mx-3">
+    <h2> haircare </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for h in haircare %}
+      <a href="{% url 'product-detail' h.id %}" class="btn"><div class="item"><img src="{{h.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{h.title}}</span><br><span class="fs-5">Rs.{{h.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mx-3">
+    <h2> Washing Machines </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for w in washing %}
+      <a href="{% url 'product-detail' w.id %}" class="btn"><div class="item"><img src="{{w.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{w.title}}</span><br><span class="fs-5">Rs.{{w.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mx-3">
+    <h2> Air Conditionars </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for a in air %}
+      <a href="{% url 'product-detail' a.id %}" class="btn"><div class="item"><img src="{{a.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{a.title}}</span><br><span class="fs-5">Rs.{{a.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div><div class="mx-3">
+    <h2> Air Conditionars </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for a in air %}
+      <a href="{% url 'product-detail' a.id %}" class="btn"><div class="item"><img src="{{a.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{a.title}}</span><br><span class="fs-5">Rs.{{a.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="mx-3">
+    <h2> fragrances </h2>
+    <div class="owl-carousel" id="slider3">
+      {% for fr in fragrances %}
+      <a href="{% url 'product-detail' fr.id %}" class="btn"><div class="item"><img src="{{fr.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{fr.title}}</span><br><span class="fs-5">Rs.{{fr.discounted_price}}</span></div></a>
+      {% endfor %}
+    </div>
+  </div>
+
 {% endblock main-content %}
 

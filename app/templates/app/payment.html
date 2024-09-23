@@ -1,0 +1,22 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Payment{% endblock title %}
+{% block main-content %}
+
+<h1>Complete Your Payment</h1>
+
+<form action="/payment/success/" method="POST">
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="{{ razorpay_key }}"
+        data-amount="{{ amount }}"
+        data-currency="INR"
+        data-order_id="{{ payment.id }}"
+        data-buttontext="Pay with Razorpay"
+        data-name="Your Store"
+        data-description="Payment for your order"
+        data-theme.color="#F37254"
+    ></script>
+    <input type="hidden" value="csrf_token">
+</form>
+{% endblock main-content %}

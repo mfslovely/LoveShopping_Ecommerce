@@ -5,87 +5,181 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <!--Owl Carousel CSS-->
     <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
-
-    <!--FontAwesome CSS-->
     <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}">
-
-    <!--Custom CSS-->
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
-
 
     <title>ShoppingX | {% block title %} {% endblock title %} </title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-     <div class="container">
-       <a class="navbar-brand" href="/">ShoppingX</a>
-       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-           <li class="nav-item">
-             <a class="nav-link active" aria-current="page" href="/">Home</a>
-           </li>
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Electronics
-             </a>
-             <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
-               <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
-               <li><a class="dropdown-item" href="#">Laptop</a></li>
-             </ul>
-           </li>
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Fashion
-             </a>
-             <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-               <li><a class="dropdown-item" href="#">Top Wear</a></li>
-               <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
-             </ul>
-           </li>
-         </ul>
-         <form class="d-flex">
-           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">S           
-           </button>
-         </form>
-         <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+      <div class="container" style="margin-right: 1558px;">
+        <a class="navbar-brand" href="/">ShoppingX</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {% if request.user.is_authenticated %}
-           <li class="nav-item dropdown mx-2">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{request.user.username | capfirst}}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Electronics
               </a>
-              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
-                <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
-                <li><a class="dropdown-item" href="{% url 'logout'%}">Logout</a></li>
+              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+                <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
+                <li><a class="dropdown-item" href="{% url 'laptop' %}">Laptop</a></li>
+                    
               </ul>
             </li>
-            <li class="nav-item mx-2">
-             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">4</span> Cart </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Fashion
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
+                <li><a class="dropdown-item" href="{% url 'topwears' %}">Top Wear</a></li>
+                <li><a class="dropdown-item" href="{% url 'bottomwears' %}">Bottom Wear</a></li>
+                <!-- Add more fashion categories here if needed -->
+              </ul>
             </li>
-            {% else %}
-            <li class="nav-item mx-2">
-             <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="homeAppliancesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Home Appliances
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="homeAppliancesDropdown">
+                <li><a class="dropdown-item" href="{% url 'frigidger' %}">Refrigerators</a></li>
+                <li><a class="dropdown-item" href="{% url 'washing' %}">Washing Machines</a></li>
+                <li><a class="dropdown-item" href="{% url 'air' %}">Air Conditioners</a></li>
+                <li><a class="dropdown-item" href="{% url 'microwaves' %}">Microwaves</a></li>
+                <li><a class="dropdown-item" href="{% url 'vacum'%}">Vacuum Cleaners</a></li>
+              </ul>
             </li>
-            <li class="nav-item mx-2">
-             <a href="{% url 'customerregistration' %}" class="nav-link text-white">Registration</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="beautyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Beauty & Personal Care
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="beautyDropdown">
+                <li><a class="dropdown-item" href="{% url 'skincare' %}">Skincare</a></li>
+                <li><a class="dropdown-item" href="{% url 'haircare' %}">Haircare</a></li>
+                <li><a class="dropdown-item" href="{% url 'makeup' %}">Makeup</a></li>
+                <li><a class="dropdown-item" href="{% url 'fragrances' %}">Fragrances</a></li>
+              </ul>
             </li>
-            {% endif %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="sportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sports & Outdoors
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="sportsDropdown">
+                <li><a class="dropdown-item" href="{% url 'exercise' %}">Exercise Equipment</a></li>
+                <li><a class="dropdown-item" href="{% url 'camping' %}">Camping Gear</a></li>
+                <li><a class="dropdown-item" href="{% url 'sports' %}">Sportswear</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Bikes</a></li> -->
+              </ul>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="booksDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Books & Media
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="booksDropdown">
+                <li><a class="dropdown-item" href="#">Fiction</a></li>
+                <li><a class="dropdown-item" href="#">Non-Fiction</a></li>
+                <li><a class="dropdown-item" href="#">Educational</a></li>
+                <li><a class="dropdown-item" href="#">Music</a></li>
+                <li><a class="dropdown-item" href="#">Movies</a></li>
+              </ul> -->
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="toysDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Toys & Games
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="toysDropdown">
+                <li><a class="dropdown-item" href="{% url 'action' %}">Action Figures</a></li>
+                <li><a class="dropdown-item" href="{% url 'boardGames' %}">Board Games</a></li>
+                <li><a class="dropdown-item" href="{% url 'puzzles' %}">Puzzles</a></li>
+                <li><a class="dropdown-item" href="{% url 'EducationalToys' %}">Educational Toys</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="furnitureDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Furniture
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="furnitureDropdown">
+                <li><a class="dropdown-item" href="{% url 'LivingRoom' %}">Living Room</a></li>
+                <li><a class="dropdown-item" href="#">Bedroom</a></li>
+                <li><a class="dropdown-item" href="#">Office</a></li>
+                <li><a class="dropdown-item" href="#">Storage</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="groceryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Grocery
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="groceryDropdown">
+                <li><a class="dropdown-item" href="#">Fresh Produce</a></li>
+                <li><a class="dropdown-item" href="#">Snacks</a></li>
+                <li><a class="dropdown-item" href="#">Beverages</a></li>
+                <li><a class="dropdown-item" href="#">Household Essentials</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="healthDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Health & Wellness
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="healthDropdown">
+                <li><a class="dropdown-item" href="#">Supplements</a></li>
+                <li><a class="dropdown-item" href="#">Fitness Equipment</a></li>
+                <li><a class="dropdown-item" href="#">Medical Supplies</a></li>
+              </ul>
+            </li>
           </ul>
-         </div>
-       </div>
-     </div>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-warning" type="submit">Search</button>
+          </form>
+          <div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if request.user.is_authenticated %}
+                  {% if request.user.is_seller %}
+                  <li class="nav-item">
+                      <a href="{% url 'seller_products' %}" class="nav-link">My Products</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{% url 'add_product' %}" class="nav-link">Add Product</a>
+                  </li>
+                      {% endif %}
+                  <li class="nav-item dropdown mx-2">
+                      <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ request.user.username | capfirst }}
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                          <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                          <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                          <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+                          <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                      </ul>
+                  </li>
+                  <li class="nav-item mx-2">
+                      <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">4</span> Cart </a>
+                  </li>
+              {% else %}
+                  <li class="nav-item dropdown mx-2">
+                      <a class="nav-link dropdown-toggle text-white" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Login / Registration
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="authDropdown">
+                          <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                          <li><a class="dropdown-item" href="{% url 'customerregistration' %}">Buyer Registration</a></li>
+                          <li><a class="dropdown-item" href="{% url 'seller_registration' %}">Seller Registration</a></li>
+                      </ul>
+                  </li>
+              {% endif %}
+          </ul>
+          </div>
+        </div>
+      </div>
     </nav>
     {% block banner_slider %} {% endblock banner_slider %}
     {% block livesale %} {% endblock livesale %}
@@ -93,8 +187,8 @@
 
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5">
-        <small class="text-white">Copyright &copy; 2021 || Designed By GeekyShows || </small>
-        <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
+      <small class="text-white">Copyright &copy; 2024 || Designed By Lovely || </small>
+      <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
 
     <!-- Jquery -->
