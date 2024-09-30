@@ -21,3 +21,4 @@ This project is a fully functional e-commerce website built to showcase a comple
 *Backend: [python/Django]
 *Database: [SQLite3/MySQL/]
 *Authentication: JWT, OAuth
+# LoveShopping_Ecommerce
